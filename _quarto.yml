@@ -31,3 +31,7 @@ book:
       University of Surrey - Maths and Statistics Advice
   search:
     location: sidebar
+  chapters:
+    - part: "Welcome"
+      chapters:
+        - index.qmd
