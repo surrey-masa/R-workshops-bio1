@@ -16,7 +16,7 @@ metadata:
   show-setup: false
 
 book:
-  title: "R & RStudio"
+  title: "BMS1066/BMS1067 R workshops"
   page-navigation: true
   navbar:
     pinned: true
@@ -29,8 +29,3 @@ book:
     right: "Built with Quarto"
   search:
     location: sidebar
-  chapters:
-    - part: "Welcome"
-      chapters:
-        - index.qmd
-        - Introduction.qmd

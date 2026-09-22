@@ -1,9 +1,7 @@
 ---
 title: "Overview"
 editor: visual
-author: "Alice Cheng"
-date: today
-number-sections: false
+number-sections: true
 ---
 
 ## Overview {.unnumbered}

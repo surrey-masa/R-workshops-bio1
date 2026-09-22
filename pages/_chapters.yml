@@ -1,22 +1,6 @@
 book:
   chapters:
-    - part: "Intermediate R"
-      chapters:
-        - text: "Overview"
-          href: pages/Intermediate_R_1_Overview.qmd
-        - text: "Setup, data and workshop aims"
-          href: pages/Intermediate_R_2_Setup_data_and_workshop_aims.qmd
-        - text: "Getting to know your data"
-          href: pages/Intermediate_R_3_Getting_to_know_your_data.qmd
-        - text: "Data wrangling with dplyr"
-          href: pages/Intermediate_R_4_Data_wrangling_with_dplyr.qmd
-        - text: "Plotting with ggplot2"
-          href: pages/Intermediate_R_5_Plotting_with_ggplot2.qmd
-        - text: "Introduction to linear regression"
-          href: pages/Intermediate_R_6_Introduction_to_linear_regression.qmd
-        - text: "Glossary"
-          href: pages/Glossary.qmd
-    - part: "BMS1066/7"
+    - part: "Workshop materials"
       chapters:
         - text: "Workshop 1"
           href: pages/BMS_yr1_workshop1.qmd
@@ -24,11 +8,3 @@ book:
           href: pages/BMS_yr1_workshop2.qmd
         - text: "Workshop 3"
           href: pages/BMS_yr1_workshop3.qmd
-    - part: "VMS3012"
-      chapters:
-        - text: "VMS3012"
-          href: pages/VMS3012.qmd
-    - part: "Normality"
-      chapters:
-        - text: "Normality"
-          href: pages/Normality.qmd
