@@ -4,9 +4,7 @@ number-sections: false
 
 # R workshop 1:<br>Getting started in R and data handling
 
-## Introduction: R workshops overview
-
-Over three workshops this semester, you'll be learning the basics of R and RStudio.
+## Introduction
 
 ### What are R and RStudio?
 
@@ -22,59 +20,6 @@ R is the name of the programming language, while RStudio is an environment for w
 - A valuable skill for both further study and future careers
 
 While many of the tasks covered in these workshops could be completed in other software such as Excel, the coding skills you develop will form the basis for conducting more advanced analyses in R and other statistical software.
-
-### Using these course materials
-
-These course materials contain the same content as the workshops and workshop slides. They are designed to complement the workshops and provide a convenient way to access all the material in one place.
-
-**Example code**
-
-Example code will appear in grey code blocks like the one below. You can copy the code by hovering over it and clicking the clipboard icon that appears in the top-right corner of the code block. You can then paste it directly into R.
-
-```{r}
-#| eval: false
-# This is a code chunk. You can copy it it by clicking the clipboard icon.
-
-print("Welcome to R")
-```
-
-**Template code**
-
-Sometimes you will see code displayed in blue panels, such as the one below. These examples are designed to show the general structure of a particular function or piece of code and cannot be copied directly into R and run as they are. Instead, they contain blank spaces or placeholders that indicate the information you need to add.
-
-::: {.panel-tabset .panel-blue}
-## Template code - example
-
-Template code is shown in blue panels like this one
-
-```{r}
-#| eval: false
-# This code can't be copied and run as it is
-# It shows the structure of the code and the blanks you need to fill in
-
-print(_____________)
-```
-
-- Fill in the blank with the name of the object you want to print
-
-:::
-
-**Tasks**
-
-Workshop activities and exercises will appear in green boxes like the one below.
-
-::: {.callout-caution icon="false"}
-### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-
-As you work through the materials, have a go at all the tasks.
-:::
-
-
-### Getting help from MASA
-
-MASA is the Maths and Statistics Advice service at the university. They can support with mathematical and statistical topics relating to your course, including the use of statistical software.
-
-For help with R outside of these sessions, you can attend a drop-in session or book a 1:1 appointment with MASA. <a href="https://surreylearn.surrey.ac.uk/d2l/le/lessons/215610/lessons/1856863" target="_blank" rel="noopener noreferrer">More information can be found here</a>.
 
 ## Workshop 1 overview
 

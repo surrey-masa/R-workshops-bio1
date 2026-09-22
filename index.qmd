@@ -1,20 +1,62 @@
 ---
 title: "Overview"
 editor: visual
-number-sections: true
+number-sections: false
 ---
 
 ## Overview {.unnumbered}
 
-This is a quick overview of the MASA-R project. This page provides a summary of the key features and resources available.
+Over three workshops this semester, you'll be learning the basics of R and RStudio.
 
-Feel free to explore the documentation and reach out if you need assistance.
+## Using these course materials
 
-::: callout-tip
-### Example section
+These course materials contain the same content as the workshops and workshop slides. They are designed to complement the workshops and provide a convenient way to access all the material in one place.
 
-- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-- Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-- Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-- Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+**Example code**
+
+Example code will appear in grey code blocks like the one below. You can copy the code by hovering over it and clicking the clipboard icon that appears in the top-right corner of the code block. You can then paste it directly into R.
+
+```{r}
+#| eval: false
+# This is a code chunk. You can copy it it by clicking the clipboard icon.
+
+print("Welcome to R")
+```
+
+**Template code**
+
+Sometimes you will see code displayed in blue panels, such as the one below. These examples are designed to show the general structure of a particular function or piece of code and cannot be copied directly into R and run as they are. Instead, they contain blank spaces or placeholders that indicate the information you need to add.
+
+::: {.panel-tabset .panel-blue}
+## Template code - example
+
+Template code is shown in blue panels like this one
+
+```{r}
+#| eval: false
+# This code can't be copied and run as it is
+# It shows the structure of the code and the blanks you need to fill in
+
+print(_____________)
+```
+
+- Fill in the blank with the name of the object you want to print
+
 :::
+
+**Tasks**
+
+Workshop activities and exercises will appear in green boxes like the one below.
+
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+
+As you work through the materials, have a go at all the tasks.
+:::
+
+
+### Getting help from MASA
+
+MASA is the Maths and Statistics Advice service at the university. They can support with mathematical and statistical topics relating to your course, including the use of statistical software.
+
+For help with R outside of these sessions, you can attend a drop-in session or book a 1:1 appointment with MASA. <a href="https://surreylearn.surrey.ac.uk/d2l/le/lessons/215610/lessons/1856863" target="_blank" rel="noopener noreferrer">More information can be found here</a>.
