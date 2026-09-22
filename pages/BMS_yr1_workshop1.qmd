@@ -6,6 +6,8 @@ number-sections: false
 
 ## Introduction
 
+Over three workshops this semester, you’ll be learning the basics of R and RStudio.
+
 ### What are R and RStudio?
 
 R is the name of the programming language, while RStudio is an environment for working with R - essentially RStudio provides a user-friendly interface that makes writing, running, and managing R code much easier.
