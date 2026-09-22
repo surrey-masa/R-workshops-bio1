@@ -1,5 +1,8 @@
 book:
   chapters:
+    - part: "Welcome"
+      chapters:
+        - index.qmd 
     - part: "Workshop materials"
       chapters:
         - text: "Workshop 1"
