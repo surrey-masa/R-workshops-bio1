@@ -33,5 +33,4 @@ book:
   chapters:
     - part: "Welcome"
       chapters:
-        - number: 0
-          file: index.qmd
+        - file: index.qmd
