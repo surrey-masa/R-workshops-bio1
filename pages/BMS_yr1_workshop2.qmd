@@ -1,5 +1,5 @@
 ---
-number-sections: false
+number-sections: true
 ---
 
 # R workshop 2:<br>Descriptive statistics and graphing in R
