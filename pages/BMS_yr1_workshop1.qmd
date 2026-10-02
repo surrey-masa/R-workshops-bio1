@@ -1326,7 +1326,7 @@ In the next workshop, we'll continue to look at functions for exploring and summ
 ## Feedback
 
 
-<iframe width="100%" height="600px" src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=kyaQa3QQqkCeIdiURqLrtVgcZHyUszJDvoXhoILzj8dUMVdSMEQ4SVoxUDhaTkdEUDRVMkZSNUE4My4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+<iframe width="100%" height="800px" src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=kyaQa3QQqkCeIdiURqLrtVgcZHyUszJDvoXhoILzj8dUMVdSMEQ4SVoxUDhaTkdEUDRVMkZSNUE4My4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
 
 
 ## Summary

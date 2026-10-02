@@ -4,7 +4,7 @@ book:
       chapters:
         - text: "Workshop 1"
           href: pages/BMS_yr1_workshop1.qmd
-        - text: "Workshop 2"
-          href: pages/BMS_yr1_workshop2.qmd
-        - text: "Workshop 3"
-          href: pages/BMS_yr1_workshop3.qmd
+        #- text: "Workshop 2"
+        #  href: pages/BMS_yr1_workshop2.qmd
+        #- text: "Workshop 3"
+        #  href: pages/BMS_yr1_workshop3.qmd

@@ -7,7 +7,7 @@ format:
     theme: cosmo
     toc: true
     css: styles.css
-    # number-sections: false
+    number-sections: true
 
 metadata-files:
   - "pages/_chapters.yml"
