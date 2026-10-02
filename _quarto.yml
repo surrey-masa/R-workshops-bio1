@@ -31,7 +31,7 @@ book:
   search:
     location: sidebar
   chapters:
-        - file: index.qmd
+    - file: index.qmd
   
     - part: "Workshop materials"
       chapters:
