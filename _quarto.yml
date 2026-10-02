@@ -31,8 +31,6 @@ book:
   search:
     location: sidebar
   chapters:
-    - part: "Welcome"
-      chapters:
         - file: index.qmd
   
     - part: "Workshop materials"
