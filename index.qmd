@@ -5,6 +5,8 @@ editor: visual
 number-sections: false
 ---
 
+# Welcome {.unnumbered}
+
 ## Overview {.unnumbered}
 
 Over three workshops this semester, you'll be learning the basics of R and RStudio.
