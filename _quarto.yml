@@ -7,7 +7,7 @@ format:
     theme: cosmo
     toc: true
     css: styles.css
-    number-sections: true
+    number-sections: false
 
 #metadata-files:
   #- "pages/_chapters.yml"
@@ -31,7 +31,9 @@ book:
   search:
     location: sidebar
   chapters:
-    - file: index.qmd
+    - part: "Welcome"
+      chapters:
+      - file: index.qmd
   
     - part: "Workshop materials"
       chapters:

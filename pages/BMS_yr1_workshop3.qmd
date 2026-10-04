@@ -1,5 +1,5 @@
 ---
-number-sections: true
+number-sections: false
 ---
 
 # R workshop 3:<br>Statistical analysis in R
