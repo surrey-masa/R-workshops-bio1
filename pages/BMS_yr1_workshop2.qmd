@@ -401,13 +401,16 @@ describe(penguins)
 ```
 :::
 
-## Descriptive statistics for individual columns in a data frame
+## Descriptive statistics
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcomes
 
 - Use statistical functions to calculate descriptive statistics for individual columns of a data frame
+- Produce grouped descriptive statistics using the by() function
 :::
+
+### Descriptive statistics for individual columns in a data frame
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aim
@@ -480,12 +483,7 @@ Apply relevant statistical functions to relevant columns of the penguins data fr
 [Answers]
 :::
 
-## Grouped descriptive statistics
-
-::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
-- Produce grouped descriptive statistics using the by() function
-:::
+### Grouped descriptive statistics
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aim
