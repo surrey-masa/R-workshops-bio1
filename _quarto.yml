@@ -39,3 +39,5 @@ book:
       chapters:
         - text: "Workshop 1"
           file: pages/BMS_yr1_workshop1.qmd
+        - text: "Workshop 2"
+          file: pages/BMS_yr1_workshop2.qmd
