@@ -139,7 +139,8 @@ Confirm that the `readxl` package has successfully installed and loaded in your 
 
 **Step 2: Save the Excel file**
 
-Download the penguins.xlsx file from SurreyLearn [link] and save it in your dedicated folder for the R work on this module. This should be the same location as where your R script is saved.
+- Download the penguins.xlsx file from the **Week 6 R Workshop folder on SurreyLearn**
+- Move the downloaded file from your Downloads folder to the dedicated folder for your R work on this module. This should be the same location where your R script is saved.
 
 ::: {.callout-important collapse="true"}
 ### Make sure your script and the penguins.xlsx file are saved in the same folder
@@ -360,7 +361,23 @@ penguins$sex <- as.factor(penguins$sex)
 - Add the above line of code to your script and run it to convert the sex column to a factor
 - Write and run similar commands to convert the species and island columns to factors as well
 
-[Answer]
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Convert the sex column to a factor
+penguins$sex <- as.factor(penguins$sex) 
+
+# Convert the species column to a factor
+penguins$species <- as.factor(penguins$species)
+
+# Convert the island column to a factor
+penguins$island <- as.factor(penguins$island)
+```
+:::
+
+::: {style="margin-top: 0.1em;"}
+:::
 
 - Rerun `str(penguins)` or use the blue arrow next to the `penguins` object in the Environment pane to check that the variables have been converted to factors:
 
@@ -372,7 +389,7 @@ penguins$island <- as.factor(penguins$island)
 
 
 ![](../images/factors.png){width="600" style="display:block; margin: 2em auto;"}
-:::
+::::
 
 ### Data frame summaries
 
@@ -422,10 +439,8 @@ In this section, we'll first generate some *overall* descriptive statistics for 
 
 In workshop 1, we used several statistical functions to calculate descriptive statistics for individual columns in a data frame. Remember that a column of a data frame can be thought of as a vector, which means we can apply many of R's statistical functions directly to it.
 
-::: {.panel-tabset .panel-blue group="language"}
-## R
-
-**Applying a statistical function to a data frame column - general template**
+::: {.panel-tabset .panel-blue}
+## Template code - applying a statistical function to a data frame column
 
 ```{r}
 #| eval = FALSE
@@ -435,10 +450,8 @@ function      data frame name    column to summarise
 ```
 :::
 
-::: {.panel-tabset group="language"}
-## R
-
-**Example**
+::: {.panel-tabset}
+## Example - applying a statistical function to a data frame column
 
 Find the mean of the body_mass_g columns in the penguins data frame (i.e. find the mean body mass of all penguins):
 
@@ -480,27 +493,44 @@ Apply relevant statistical functions to relevant columns of the penguins data fr
 - The mean flipper length of all penguins
 - The minimum bill depth of all penguins
 
-[Answers]
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Median body mass of all penguins
+median(penguins$body_mass_g)
+
+# Mean flipper length of all penguins
+mean(penguins$flipper_length_mm)
+
+# Minimum bill depth of all penguins
+min(penguins$bill_depth_mm)
+```
 :::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
 
 ### Grouped descriptive statistics
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aim
 
-Recall that our aim is to compare body mass between different species of penguins.
+Recall that our aim is to compare body masses between the different species of penguins.
 
-In this section, we'll use grouped descriptive statistics to summarise body mass for each species separately.
+In the previous section, we calculated descriptive statistics for an entire variable (column). For example, we used `median(penguins$body_mass_g)' to find the median body mass of *all* penguins in the dataset.
+
+In this section, we'll use grouped descriptive statistics to summarise body mass for *each species* separately.
 :::
-
-In the previous section, we calculated descriptive statistics for an entire variable. For example, we found the median body mass of *all* penguins in the dataset.
 
 The `by()` function allows us to calculate statistics for groups defined by another variable. It works by applying a function to one column after splitting the data according to the categories in a second column.
 
-::: {.panel-tabset .panel-blue group="language"}
-## R
+The template below shows the general structure for using the `by()` function - it requires three arguments, in a specific order:
 
-**Using the by() function - general template**
+::: {.panel-tabset .panel-blue}
+## Template code - using the by() function
 
 ```{r}
 #| eval = FALSE
@@ -514,13 +544,12 @@ by(______________________, ____________________, _______________)
 :::
 
 ::: {.panel-tabset group="language"}
-## R
-
-**Example**
+## Example - using the by() function
 
 Calculate the median body mass of each species (i.e. calculate the median body mass *grouped by* species)
 
 ```{r}
+#| eval = FALSE
 by(penguins$body_mass_g, penguins$species, median)
 ```
 
@@ -528,13 +557,19 @@ by(penguins$body_mass_g, penguins$species, median)
 - We want to calculate the statistic separately for each species, so we put `penguins$species` in the `column to group by` position
 - We want to calculate the median, so we put `median` in the `function` position
 
-This tells R to:
+This code tells R to:
 
 - Split the body mass data into groups based on species
 - Calculate the median body mass for each species
 - Return the results for each species separately
 
-[complete and use sample language as the template]
+This is the result of running the code:
+
+```{r}
+by(penguins$body_mass_g, penguins$species, median)
+```
+
+From the results, we can see that the median body mass of the Adelie penguins is 3700g, the median body mass of the Chinstrap penguins is 3700g, and the median body mass of the Gentoo penguins is 5050g.
 
 :::
 
@@ -544,7 +579,22 @@ This tells R to:
 - Use the by() function to find the minimum body mass of each species
 - Use the by() function to find the maximum body mass of each species
 
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Minimum body mass of each species
+by(penguins$body_mass_g, penguins$species, min)
+
+# Maximum body mass of each species
+by(penguins$body_mass_g, penguins$species, max)
+```
 :::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
 
 ## Creating a boxplot with ggplot2
 
@@ -558,7 +608,7 @@ This tells R to:
 
 Recall that our aim is to compare body mass between different species of penguins.
 
-Descriptive statistics are useful for summarising body mass within each species, but visualisations can make comparisons between groups easier. A boxplot displays the median, interquartile range, and overall spread of the data, making it a useful tool for comparing distributions across species.
+Descriptive statistics - as seen in the previous section - are useful for this, but visualisations can make comparisons between groups easier. A boxplot displays the median, interquartile range, and overall spread of the data, making it a useful tool for comparing distributions across species.
 
 In this section, we'll use the ggplot2 package to create a boxplot of body mass grouped by species.
 :::
@@ -593,7 +643,7 @@ As an example, the code shown in the screenshot below produces our box plot of b
 
 ![](../images/penguin_boxplot.png){width="700" style="display:block; margin: 2em auto;"}
 
-Before running this code, let's look at its components, which form the general structure for creating any ggplot2 plot:
+Before running this code, let's look at its components in general terms, which form the structure for creating any ggplot2 plot:
 
 - Initialise the plot with the [**ggplot()**]{style="color: #C00000;"} function. Inside the brackets, specify the [**data**]{style="color: #349353;"} and the [**aesthetic mappings**]{style="color: #FDB151;"} (how variables are mapped to visual properties such as x and y axes)\
 - Choose a [**geom_xxx()**]{style="color: #901A9D;"} function based on the type of plot you want (here, `geom_boxplot()` produces a boxplot)\
@@ -653,7 +703,7 @@ ggplot(penguins, aes(x = species, y = body_mass_g)) +
 Below is a template for creating a boxplot with any dataset you like. Remember that the variable on the y-axis should be a continuous variable, while the variable on the x-axis should be a categorical variable representing the groups being compared.
 
 ::: {.panel-tabset .panel-blue}
-## Template code: boxplot
+## Template code - boxplot
 
 ```{r}
 #| eval: false
@@ -663,7 +713,7 @@ ggplot(_________, aes(x = _________, y = ________)) +
        y = "_______")
 ```
 
-- Fill in the first blank with the name of the data you want to use for plotting
+- Fill in the first blank with the name of the data frame you want to use for plotting
 - Fill in the second blank (after x =) with the name of the variable (column) in the data you want to plot on the x-axis
 - Fill in the third blank (after y =) with the name of the variable (column) in the data you want to plot on the y-axis
 - Fill in the blanks inside the `labs()` function with the corresponding x and y labels that you want to add to your plot. These should be in quotation marks.
@@ -671,7 +721,7 @@ ggplot(_________, aes(x = _________, y = ________)) +
 :::
 
 ::: {.panel-tabset}
-## Examples: boxplot
+## Examples - boxplot
 
 This is our original boxplot code, which produces a boxplot of body mass by species:
 
@@ -698,7 +748,7 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
 ```
 :::
 
-## Extension: additional boxplot task
+### Extension: additional boxplot task
 
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
@@ -707,10 +757,28 @@ Suppose you want to compare bill length for males versus females
 - Plot a box plot of bill length split by sex
 - What can we say about differences in bill lengths for males and females?
 
-[Hint] - x and y axis
-[Answer]
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Plot a box plot of bill length split by sex
+
+ggplot(penguins, aes(x = sex, y = bill_length_mm)) +
+  geom_boxplot() +
+  labs(x = "Sex",
+       y = "Bill length (mm)")
+```
+
+What can we say about differences in bill lengths for males and females?
+
+Males have a higher median bill length than females, while the interquartile ranges are of similar width.
 
 :::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
 
 ## Summary
 
