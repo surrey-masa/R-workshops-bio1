@@ -32,7 +32,7 @@ This data is from the penguins dataset in R, which contains data on three pengui
 Often in statistics we want to compare groups of data. We'll used the penguins dataset to start looking at some group comparisons. Specifically, we'll compare body mass between different species of penguins.
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aim
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Analysis aim
 
 Compare body mass between different species of penguins using:
 
@@ -266,7 +266,6 @@ A couple of things to note about the video:
 
 - Explore a data frame to understand its structure, contents and basic characteristics
 - Recognise when variables in a data frame should be stored as factors and convert them to factors
-- Generate descriptive summaries of data frames using the summary() and describe() functions
 
 :::
 
@@ -391,13 +390,23 @@ penguins$island <- as.factor(penguins$island)
 ![](../images/factors.png){width="600" style="display:block; margin: 2em auto;"}
 ::::
 
-### Data frame summaries
+## Descriptive statistics
 
-Viewing the first few rows of a data frame (or the entire data frame) and using `str()` are useful first steps for understanding a dataset. However, particularly for larger datasets, it can be difficult to quickly understand the overall structure or key properties of the data.
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcomes
 
-For example, with the gapminder data, we might want to know how many observations there are for each country, have a full list of all the countries included, or generate some basic summary statistics for numeric variables like population and life expectancy.
+- Use statistical functions to calculate descriptive statistics for individual columns of a data frame
+- Produce grouped descriptive statistics using the by() function
+- Generate descriptive summaries of data frames using the summary() and describe() functions
+:::
 
-To get this type of overview, we can use summary functions. The `summary()` function produces a quick summary of each column, with the type of output depending on the variable's data type:
+### Descriptive summaries
+
+In R, several functions can generate descriptive summaries. These can be applied to an entire data frame (summarising all columns) or to a single column (summarising just that variable).
+
+Two of these functions are the `summary()` and `describe()` functions. The `describe()` function is from the Hmisc package, and provides a more detailed summary than `summary()`. It also indicates whether any variables contain missing values. 
+
+Both functions provide a range of descriptive statistics for each variable (column), making them a quick way to explore a dataset. 
 
 ::: {.panel-tabset group="language"}
 ## R
@@ -406,8 +415,6 @@ To get this type of overview, we can use summary functions. The `summary()` func
 summary(penguins)
 ```
 :::
-
-Another useful function is `describe()` from the Hmisc package. This provides a more detailed summary than `summary()`, and also indicates whether any variables contain missing values:
 
 ::: {.panel-tabset group="language"}
 ## R
@@ -418,19 +425,11 @@ describe(penguins)
 ```
 :::
 
-## Descriptive statistics
-
-::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcomes
-
-- Use statistical functions to calculate descriptive statistics for individual columns of a data frame
-- Produce grouped descriptive statistics using the by() function
-:::
 
 ### Descriptive statistics for individual columns in a data frame
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aim
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Analysis aim
 
 Recall that our aim is to compare body mass between different species of penguins.
 
@@ -516,7 +515,7 @@ min(penguins$bill_depth_mm)
 ### Grouped descriptive statistics
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aim
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Analysis aim
 
 Recall that our aim is to compare body masses between the different species of penguins.
 
@@ -604,7 +603,7 @@ by(penguins$body_mass_g, penguins$species, max)
 :::
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aim
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Analysis aim
 
 Recall that our aim is to compare body mass between different species of penguins.
 
@@ -779,6 +778,11 @@ Males have a higher median bill length than females, while the interquartile ran
 :::
 
 ::::
+
+## Feedback
+
+<iframe width="100%" height="800px" src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=kyaQa3QQqkCeIdiURqLrtVgcZHyUszJDvoXhoILzj8dURE9SQlpZWVdOSFkyOTNVR0o4OUNCRlJRRS4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+
 
 ## Summary
 
