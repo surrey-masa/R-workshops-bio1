@@ -46,7 +46,7 @@ Compare body mass between different species of penguins using:
 - Import Excel data
 - Explore the data
 - Produce descriptive statistics
-- Plot the data
+- Graphing using ggplot2
 
 ## Setup {#setup}
 
@@ -59,12 +59,22 @@ Compare body mass between different species of penguins using:
 
 Open RStudio (you do not need to open R separately).
 
+**Step 2: Clear your environment**
 
-**Step 2: Create a new script**
+Run the following code or use the broom icon in the Environment pane to clear your workspace:
+
+```{r}
+#| eval: false
+rm(list = ls())
+```
+
+(You do not need to do this every time you use R, only if you want to start with a fresh workspace.)
+
+**Step 3: Create a new script**
 
 Create a new script and save it in your dedicated folder for the R work on this module.
 
-**Step 3: Install required packages**
+**Step 4: Install required packages**
 
 Copy the code below into your *console* and run it. This will install the readxl package, which we'll use for importing Excel data, and the ggplot2 package, which we'll use for plotting. 
 
@@ -88,7 +98,7 @@ Installing a package downloads it to your computer so that R can use it in futur
 This is why we are running this code in the console rather than including it in our script. Installing a package is a one-time setup task, so it does not need to be repeated every time a script is run.
 :::
 
-**Step 4: Load required packages**
+**Step 5: Load required packages**
 
 Below is the code for *loading* the packages that are needed for this workshop. Copy the code and paste it into the top of your new *script*, then run the code.
 
@@ -395,9 +405,9 @@ penguins$island <- as.factor(penguins$island)
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcomes
 
+- Generate descriptive summaries of data frames using the summary() and describe() functions
 - Use statistical functions to calculate descriptive statistics for individual columns of a data frame
 - Produce grouped descriptive statistics using the by() function
-- Generate descriptive summaries of data frames using the summary() and describe() functions
 :::
 
 ### Descriptive summaries
@@ -436,7 +446,9 @@ Recall that our aim is to compare body mass between different species of penguin
 In this section, we'll first generate some *overall* descriptive statistics for body mass across all penguins in the dataset.
 :::
 
-In workshop 1, we used several statistical functions to calculate descriptive statistics for individual columns in a data frame. Remember that a column of a data frame can be thought of as a vector, which means we can apply many of R's statistical functions directly to it.
+If you want a specific statistic for a specific variable, it is often more efficient to apply the relevant statistical function directly to that variable (column). We saw a couple of these functions at the end of Workshop 1.
+
+The template code below shows the general code structure for applying a function to a data frame column:
 
 ::: {.panel-tabset .panel-blue}
 ## Template code - applying a statistical function to a data frame column
@@ -595,7 +607,7 @@ by(penguins$body_mass_g, penguins$species, max)
 
 ::::
 
-## Creating a boxplot with ggplot2
+## Graphing using ggplot2
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
@@ -747,14 +759,13 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
 ```
 :::
 
-### Extension: additional boxplot task
+### Additional tasks
 
 ::: {.callout-caution icon="false"}
-### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-Suppose you want to compare bill length for males versus females
-
-- Plot a box plot of bill length split by sex
-- What can we say about differences in bill lengths for males and females?
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"} Task
+- Produce a boxplot showing bill length by sex
+- Add a comment comparing bill length between male and female penguins
+- Use the by() function to produce the median, lower quartile, upper quartile, minimum, and maximum bill length for male and female penguins
 
 ::: {.callout-caution icon="false" collapse="true"}
 ### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
@@ -766,11 +777,105 @@ ggplot(penguins, aes(x = sex, y = bill_length_mm)) +
   geom_boxplot() +
   labs(x = "Sex",
        y = "Bill length (mm)")
+
+# Males have a higher median bill length than females, while the interquartile ranges are of similar width.
+
 ```
 
-What can we say about differences in bill lengths for males and females?
+```{r}
+# Median, lower quartile, upper quartile, minimum, and maximum bill length for male and female penguins
 
-Males have a higher median bill length than females, while the interquartile ranges are of similar width.
+by(penguins$bill_length_mm, penguins$sex, quantile(0.25))
+by(penguins$bill_length_mm, penguins$sex, quantile(0.75))
+by(penguins$bill_length_mm, penguins$sex, min)
+by(penguins$bill_length_mm, penguins$sex, max)
+
+```
+
+:::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
+
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"} Extension task: scatter plot
+
+ggplot2 can be used to produce many other types of plots by changing geom_boxplot() to another geometry (i.e. another plot type).
+
+- Using the code from one of your boxplots as a starting point, produce a scatter plot of bill length against bill depth by replacing `geom_boxplot()` with `geom_point()` and adjusting the variables
+- Try changing the colour of the points by adding a colour option inside the geom_point function e.g. geom_point(colour="blue")
+
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Scatter plot of bill length against bill depth
+
+ggplot(data = penguins,
+       aes(x = bill_depth_mm, y = bill_length_mm)) +
+  geom_point()+
+  labs(
+    x = "Bill depth (mm)",
+    y = "Bill length (mm)"
+  )
+```
+
+```{r}
+# Same scatter plot, with colour="blue" added to make the points blue
+
+ggplot(data = penguins,
+       aes(x = bill_depth_mm, y = bill_length_mm)) +
+  geom_point(colour="blue")+
+  labs(
+    x = "Bill depth (mm)",
+    y = "Bill length (mm)"
+  )
+```
+
+:::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
+
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"} Extension task: histogram
+
+Recall that a histogram is a graph used to assess the frequency distribution of a continuous variable .
+
+- Produce a histogram of body mass, using `geom_histogram()`
+
+Hint: You will need to remove the `y = …`  argument from inside `aes()` function. This is because a histogram only requires one variable. ggplot2 automatically counts the number of observations in each interval (bin) and plots these frequencies on the y-axis.
+
+- You can change the width of the bins using the binwidth argument. Experiment with different values e.g. `geom_histogram(binwidth=300)` and observe how the histogram changes.
+
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Histogram of body mass
+
+ggplot(penguins, aes(x = body_mass_g)) +
+  geom_histogram() +
+  labs(
+    x = "Body mass (g)",
+    y = "Frequency"
+  )
+```
+
+```{r}
+# Change to a more suitable binwidth
+
+ggplot(penguins, aes(x = body_mass_g)) +
+  geom_histogram(binwidth=300) +
+  labs(
+    x = "Body mass (g)",
+    y = "Frequency"
+  )
+```
 
 :::
 
