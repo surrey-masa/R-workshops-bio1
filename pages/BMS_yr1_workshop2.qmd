@@ -785,8 +785,8 @@ ggplot(penguins, aes(x = sex, y = bill_length_mm)) +
 ```{r}
 # Median, lower quartile, upper quartile, minimum, and maximum bill length for male and female penguins
 
-by(penguins$bill_length_mm, penguins$sex, quantile(0.25))
-by(penguins$bill_length_mm, penguins$sex, quantile(0.75))
+by(penguins$bill_length_mm, penguins$sex, quantile, 0.25)
+by(penguins$bill_length_mm, penguins$sex, quantile, 0.75)
 by(penguins$bill_length_mm, penguins$sex, min)
 by(penguins$bill_length_mm, penguins$sex, max)
 
