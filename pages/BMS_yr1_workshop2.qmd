@@ -365,7 +365,7 @@ The code below converts the `sex` column in the `penguins` dataset from a charac
 penguins$sex <- as.factor(penguins$sex) 
 ```
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 - Add the above line of code to your script and run it to convert the sex column to a factor
 - Write and run similar commands to convert the species and island columns to factors as well
@@ -496,7 +496,7 @@ Most of the functions in this table are designed to be applied to numeric vector
 
 The exception is `table()`, which is commonly used with categorical variables (factors or character variables) to count the number of observations in each category.
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 Apply relevant statistical functions to relevant columns of the penguins data frame to find:
 
@@ -584,7 +584,7 @@ From the results, we can see that the median body mass of the Adelie penguins is
 
 :::
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 
 - Use the by() function to find the minimum body mass of each species
@@ -761,8 +761,8 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
 
 ### Additional tasks
 
-::: {.callout-caution icon="false"}
-### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"} Task
+:::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"} Task: another boxplot
 - Produce a boxplot showing bill length by sex
 - Add a comment comparing bill length between male and female penguins
 - Use the by() function to produce the median, lower quartile, upper quartile, minimum, and maximum bill length for male and female penguins
@@ -799,7 +799,7 @@ by(penguins$bill_length_mm, penguins$sex, max)
 
 ::::
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"} Extension task: scatter plot
 
 ggplot2 can be used to produce many other types of plots by changing geom_boxplot() to another geometry (i.e. another plot type).
@@ -841,7 +841,7 @@ ggplot(data = penguins,
 
 ::::
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"} Extension task: histogram
 
 Recall that a histogram is a graph used to assess the frequency distribution of a continuous variable .
