@@ -20,12 +20,14 @@ By the end of this workshop, you should be able to:
 - Run a t-test to statistically compare two groups of measurements
 :::
 
-### Workshop structure??
+### Workshop outline
 
-We'll start by....
+In Workshop 2, we compared groups of measurements using descriptive statistics and boxplots. Specifically, we compared the body masses of different penguin species.
+
+In this workshop, we will apply these skills to a new dataset and extend them by carrying out an independent-samples t-test to compare two independent groups.
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aim
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Analysis aim
 
 Investigate whether adding a supplement to hamster pup diet will affect tail growth
 
@@ -39,51 +41,53 @@ Investigate whether adding a supplement to hamster pup diet will affect tail gro
 - Follow the steps below to get set up for this workshop
 :::
 
-1.  Open RStudio (you do not need to open R separately)
+**Step 1: Open RStudio**
 
-2.  Create a new script (File > New File > R Script) and save it in your dedicated folder for the R work on this module
+Open RStudio (you do not need to open R separately).
 
-3.  Below is the code for installing the packages that are needed for this workshop. Copy and paste the code for any packages you have not previously installed into your **console** and run it.
+**Step 2 (OPTIONAL): Clear your environment**
 
-!! explain why we need each of these
-
-::: {.panel-tabset group="language"}
-## R
-
-{{< fa triangle-exclamation >}} If you have previously installed any of these packages on your device (e.g. we installed HMisc is workshop 1), you do not need to install them again.
+Run the following code or use the broom icon in the Environment pane to clear your workspace:
 
 ```{r}
 #| eval: false
-# Install packages
-install.packages ("readxl")
+rm(list = ls())
+```
+
+(You do not need to do this every time you use R, only if you want to start with a fresh workspace.)
+
+**Step 3: Create a new script**
+
+Create a new script and save it in your dedicated folder for the R work on this module.
+
+**Step 4: Install required packages**
+
+***You can skip this step if you have previously installed these packages***
+
+Copy the code below into your *console* and run it. This will install the readxl package, which we'll use for importing Excel data, and the ggplot2 package, which we'll use for plotting. 
+
+```{r}
+#| eval: false
+install.packages("readxl")
 install.packages("ggplot2")
 ```
-:::
 
-4.  Below is the code for *loading* the packages that are needed for this workshop. Copy the code and paste it into the top of your new **script**, then run this code.
+**Step 5: Load required packages**
 
-::: {.panel-tabset group="language"}
-## R
+Below is the code for *loading* the packages that are needed for this workshop. Copy the code and paste it into the top of your new *script*, then run the code.
 
 ```{r}
 #| message: false
 #| warning: false
 #| results: "hide"
-# Load packages
+library(Hmisc)
 library(readxl)
 library(ggplot2)
 ```
 
-{{< fa lightbulb >}} You'll need to load any packages required for your work each time you start a new R session.
-:::
-
-::: {style="margin-top: 2em;"}
-:::
-
-::: callout-important
-### Write code in your script, not the console
-
-From now on, unless you're testing a small piece of code, write all of your code in the script rather than the console. This makes it easier to save, review, and rerun your work later.
+::: {.callout-note icon="false" collapse="true"}
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Packages need to be loaded in each R session
+Loading a package makes its functions available for use in your current R session. Unlike installation, packages must be loaded each time you start R.
 :::
 
 ## Importing workshop 3 data
@@ -178,7 +182,7 @@ A couple of things to note about the video:
 
 ## Further practice: Exploring data, producing grouped descriptives and creating boxplots
 
-In Workshop 2, we explored the penguins dataset and used descriptive statistics and a boxplot to compare body mass across species.
+In workshop 2, we explored the penguins dataset and used descriptive statistics and a boxplot to compare body mass across species.
 
 We will now follow the same process to investigate differences in tail growth between two groups of hamsters.
 
@@ -226,51 +230,83 @@ Often, we want to obtain descriptive statistics broken down by certain subsets o
 
 We can see that this might be helpful for us here, because we want to compare tail growth between the treatment and the control group.
 
-Recall from Workshop 2 that the `by()` function can be used to find grouped descriptive statistics:
+Recall from workshop 2 that the `by()` function can be used to find grouped descriptive statistics:
 
-::: {.panel-tabset .panel-blue group="language"}
-## R
-
-**Using the by() function - general template**
+::: {.panel-tabset .panel-blue}
+## Template code - using the by() function
 
 ```{r}
 #| eval = FALSE
-by(______________________, ____________________, ___________________)
-    column to summarise     column to group by    function to use
+by(______________________, ____________________, _______________)
+    column to summarise     column to group by    function
 ```
 
-[any extra info from before?]
-
+- In the `column to summarise` blank, enter the variable you want to calculate a statistic for. For example, penguins$body_mass_g.
+- In the `column to group by` blank, enter the variable that defines the groups. For example, penguins$species.
+- In the `function` blank, enter the summary statistic you want to calculate. For example, mean, median, sd etc.
 :::
 
-In our`ws3data`:
+To produce descriptive statistics for tail length in each treatment group in the workshop 3 dataset (`ws3data`):
 
-- Our `column to summarise` will be `tail_length_mm`, because this is the thing we have measured and want to summarise.
-- Our `column to group by` will be `treat_group`, because this column contains the groups that we want to create separate summaries for
+- Our "column to summarise" is `ws3data$tail_length_mm`, because this contains the measurements that we want to summarise
+- Our "column to group by" is `ws3data$treat_group`, because this contains the treatment groups for which we want separate summaries
 
 Remember that to select a column from a data frame, we need to use the `$` operator, so to select the `tail_length_mm` column we use `ws3data$tail_length_mm`, and to select the `treat_group` column, we use `ws3data$treat_group`.
 
-- The `function to use` is the function corresponding to whatever descriptive statistics or summary you would like to produce. For example, if you want to find the median, use `mean`.
+- The "function to use" is the R function corresponding to the summary measure you want to calculate. For example, use `mean` for the mean, 'median' for the median etc.
 
 So altogether, to find the mean tail length for each treatment group, we would use the command:
+
+::: {.panel-tabset group="language"}
+## Example - using the by() function
 
 ```{r}
 by(ws3data$tail_length_mm, ws3data$treat_group, mean)
 ```
+:::
 
-[Q. What does this tell us about the [average] tail length for the two groups? Which is higher? What does this initially suggest about our aim?]
-
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+Apply the `by()` function to the workshop 3 data (`ws3data`) to:
+
 - Find the median tail length of each group
 - Find the standard deviation of the tail length of each group
 - Find the minimum tail length in each group
 - Find the maximum tail length in each group
 
-[You make need to look back at the functions table]
+What can we say about the differences in tail length between the groups?
 
-[Answers]
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Median tail length of each treatment group
+by(ws3data$tail_length_mm, ws3data$treat_group, median)
+
+# Standard deviation of the tail length of each group
+by(ws3data$tail_length_mm, ws3data$treat_group, sd)
+
+# Minimum tail length in each group
+by(ws3data$tail_length_mm, ws3data$treat_group, min)
+
+# Maximum tail length in each group
+by(ws3data$tail_length_mm, ws3data$treat_group, max)
+```
+::: {style="margin-top: 0.1em;"}
 :::
+
+Based on these summaries, the supplement group appear generally to have longer tails than the control group:
+
+- The mean tail length is higher in the supplement group (16 mm) than in the control group (10.3 mm)
+- The median tail length is also higher in the supplement group (16 mm) than in the control group (11 mm)
+- The standard deviations are similar (2 mm in the supplement groups, 1.9 mm in the control group), indicating a similar amount of variability in the two groups
+- The minimum and maximum values are higher in the supplement group (12 to 19 mm) than in the control group (6 to 12 mm)
+:::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
 
 ### Creating a boxplot with ggplot2
 
@@ -279,7 +315,7 @@ In workshop 2 we learnt how to create a boxplot using ggplot2 data.
 This is the template code:
 
 ::: {.panel-tabset .panel-blue}
-## Template code: boxplot
+## Template code - boxplot
 
 ```{r}
 #| eval: false
@@ -289,21 +325,40 @@ ggplot(_________, aes(x = _________, y = ________)) +
        y = "_______")
 ```
 
-- Fill in the first blank with the name of the data you want to use for plotting
+- Fill in the first blank with the name of the data frame you want to use for plotting
 - Fill in the second blank (after x =) with the name of the variable (column) in the data you want to plot on the x-axis
 - Fill in the third blank (after y =) with the name of the variable (column) in the data you want to plot on the y-axis
 - Fill in the blanks inside the `labs()` function with the corresponding x and y labels that you want to add to your plot. These should be in quotation marks.
 
 :::
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-- Produce a boxplot to visually compare tail lengths between the two treatment groups.
+Using the workshop 3 data (`ws3data`):
 
-[Hint]
+- Produce a boxplot to visually compare tail lengths between the two treatment groups
 
-[Answers]
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Plot a box plot of tail length by treatment group
+
+ggplot(ws3data, aes(x = treat_group, y = tail_length_mm)) +
+  geom_boxplot() +
+  labs(x = "Treatment groups",
+       y = "Tail length (mm)")
+```
+::: {style="margin-top: 0.1em;"}
 :::
+
+Observations: Males have a higher median bill length than females, while the interquartile ranges are of similar width
+:::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
 
 ## Extension: Further boxplot customisations
 
