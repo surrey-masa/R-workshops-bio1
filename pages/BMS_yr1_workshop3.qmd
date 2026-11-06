@@ -128,7 +128,7 @@ Confirm that the `readxl` package has successfully installed and loaded in your 
 
 **Step 2: Save the Excel file**
 
-- Download the Workshop 3 data.xlsx file from the **Week 6 R Workshop folder on SurreyLearn**
+- Download the Workshop 3 data.xlsx file from the **Week 7 R Workshop folder on SurreyLearn**
 - Move the downloaded file from your Downloads folder to the dedicated folder for your R work on this module. This should be the same location where your R script is saved
 
 **Step 3: Set your working directory**
@@ -402,12 +402,14 @@ ggplot(_________, aes(x = _________, y = ________)) +
 :::
 
 :::: {.callout-caution icon="false"}
+
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 Using the workshop 3 data (`ws3data`):
 
 - Produce a boxplot to visually compare tail lengths between the two treatment groups
 
 ::: {.callout-caution icon="false" collapse="true"}
+
 ### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 
 ```{r}
@@ -529,9 +531,6 @@ ggplot(_________, aes(x = _________, y = ________)) +
 
 - In the blank after `fill =`, fill in a colour in quotations
 
-
-[link to all colour options]
-
 :::
 
 **Themes**
@@ -565,12 +564,14 @@ Some common ones are:
 **Customising the tail lengths boxplot**
 
 :::: {.callout-caution icon="false"}
+
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 In the previous section you produced a boxplot to compare tail lengths between treatment groups. Now customise your plot:
 
 - Add the argument `fill = treat_group` to the `aes()` function to tell R to colour the boxes according to the treatment group
 
 ::: {.callout-caution icon="false" collapse="true"}
+
 ### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 ```{r}
 # Add the argument `fill = treat_group` to the `aes()` function to tell R to colour the boxes according to the treatment group
@@ -580,8 +581,10 @@ ggplot(ws3data, aes(x = treat_group, y = tail_length_mm, fill = treat_group)) +
   labs(x = "Treatment groups",
        y = "Tail length (mm)")
 ```
+
 ::: {style="margin-top: 0.1em;"}
 :::
+
 :::
 
 - Add to a theme to your plot to change the overall look
@@ -598,13 +601,16 @@ ggplot(ws3data, aes(x = treat_group, y = tail_length_mm, fill = treat_group)) +
        y = "Tail length (mm)") +
   theme_minimal()
 ```
+
 ::: {style="margin-top: 0.1em;"}
 :::
+
 :::
 
 - Add the component `+ scale_fill_manual(values = c("red", "green"))` to your plot. This allows you to specify the colours used for the boxes. (If you use `fill = treat_group` on its own, R will choose the colours automatically.) 
 
 ::: {.callout-caution icon="false" collapse="true"}
+
 ### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 
 ```{r}
@@ -627,34 +633,41 @@ ggplot(ws3data, aes(x = treat_group, y = tail_length_mm, fill = treat_group)) +
   scale_fill_manual(values = c("blue", "yellow"))
 
 ```
+
 ::: {style="margin-top: 0.1em;"}
 :::
+
 :::
 
 ::: {style="margin-top: 0.1em;"}
 :::
+
 ::::
 
-**Creating and customising a boxplot using the iris data** {#iris}
+**Creating and customising a boxplot using the iris data**
 
-:::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false" #iris}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 - The iris data set, built into R, contains data on 150 iris flowers. Store it as a data frame using the following line of code: `iris <- data.frame(iris)`
 
 ::: {.callout-caution icon="false" collapse="true"}
+
 ### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 
 ```{r}
 #| results: hide
 iris <- data.frame(iris)
 ```
+
 ::: {style="margin-top: 0.1em;"}
 :::
+
 :::
 
 - Create a boxplot of petal length by species
 
 ::: {.callout-caution icon="false" collapse="true"}
+
 ### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 
 ```{r}
@@ -665,13 +678,16 @@ ggplot(iris, aes(x = Species, y = Petal.Length)) +
        x = "Species",
        y = "Petal Length")
 ```
+
 ::: {style="margin-top: 0.1em;"}
 :::
+
 :::
 
 - Colour the boxes manually to be yellow, purple and orange
 
 ::: {.callout-caution icon="false" collapse="true"}
+
 ### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 ```{r}
 # Boxplot of petal length by species
@@ -682,11 +698,13 @@ ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
        x = "Species",
        y = "Petal Length")
 ```
+
 ::: {style="margin-top: 0.1em;"}
 :::
+
 :::
 
-- Remove the legend (this link may be helpful: https://r-graph-gallery.com/239-custom-layout-legend-ggplot2.html)
+- Remove the legend (this link may be helpful: <https://r-graph-gallery.com/239-custom-layout-legend-ggplot2.html>)
 
 ::: {.callout-caution icon="false" collapse="true"}
 
@@ -701,8 +719,10 @@ ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
        y = "Petal Length") +
   theme(legend.position = "none") 
 ```
+
 ::: {style="margin-top: 0.1em;"}
 :::
+
 :::
 
 - Add the component `+ geom_point()`
@@ -723,11 +743,13 @@ ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
        y = "Petal Length") +
   theme(legend.position = "none") 
 ```
+
 ::: {style="margin-top: 0.1em;"}
 :::
+
 :::
 
-- Now replace the above component (`+ geom_point()` with: `+ geom_jitter()`
+- Now replace the above component (`+ geom_point()`) with: `+ geom_jitter()`
 - What does this do?
 - Trying adding the arguments `width=0.1` and `alpha=0.3` inside `geom_jitter()`. What effect does each argument have on the appearance of the plot? Try some other values.
 
@@ -764,12 +786,15 @@ ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
        y = "Petal Length") +
   theme(legend.position = "none") 
 ```
+
 ::: {style="margin-top: 0.1em;"}
 :::
+
 :::
 
 ::: {style="margin-top: 0.1em;"}
 :::
+
 ::::
 
 ## Statistical tests in R
@@ -950,6 +975,10 @@ summary(aov_results)
 ::: {style="margin-top: 0.1em;"}
 :::
 ::::
+
+## Feedback
+
+<iframe width="100%" height="800px" src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=kyaQa3QQqkCeIdiURqLrtVgcZHyUszJDvoXhoILzj8dUNU1FMVlaNkRUUVAxV0dNRlk1UksyWUFGVi4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
 
 
 ## Summary
