@@ -428,13 +428,13 @@ ggplot(ws3data, aes(x = treat_group, y = tail_length_mm)) +
 
 ::::
 
-## ggplot2: Extension material
+## ggplot2 extension material
 
-### Additional customisation options
+### Additional boxplot customisation options
 
-### Changing the fill colour of the boxes
+**Changing the fill colour of the boxes**
 
-**Variable aesthetics**
+***Variable aesthetics***
 
 In ggplot2, `aes` (short for "aesthetics") refers to the visual properties of the plot - things like position (x and y), colour, size, and shape - and how variables in your data are mapped to them.
 
@@ -443,7 +443,7 @@ We have already used `x=` and `y=` inside the `aes()` function to map variables 
 We can also map variables to other properties such as colour.
 
 ::: {.panel-tabset .panel-blue}
-## Template code - boxplot including fill colour by box
+## Template code - use a different fill colour for each box in a boxplot
 
 In your existing boxplot code, add the argument `fill = ` as an additional argument inside the `aes()` function:
 
@@ -455,21 +455,21 @@ ggplot(_________, aes(x = _________, y = ________, fill = _________)) +
        y = "_______")
 ```
 
-- In the blank after `fill =`, fill in the name of the variable used on the x-axis (i.e. the variable that defines the boxes) 
-- e.g. `fill = treatment_group`
+- In the blank after `fill =`, fill in the name of the *variable* used on the x-axis (i.e. the variable that defines the boxes) 
+- e.g. for our ws3data boxplot, it would be `fill = treat_group`
 
 :::
 
-**Fixed aesthetics**
+***Fixed aesthetics***
 
 So far we have used `geom_boxplot()` with no arguments inside the brackets, but there are lots of additional customisation options available by specifying arguments inside it.
 
 Whereas aesthetics specified inside the `aes()`function map a *variable* to a visual property, aesthetics can be specified inside `geom_boxplot()` to set a visual property to a constant value i.e. the same property for the whole plot.
 
-For example, if we put `fill = "blue"` will colour all of the boxes blue.
+For example, if we put `fill = "blue"` inside `geom_boxplot()`, all the boxes will become blue.
 
 ::: {.panel-tabset .panel-blue}
-## Template code - boxplot including fill colour by box
+## Template code - choose a colour for all boxes in a boxplot
 
 In your existing boxplot code, add the argument `fill = ` as an argument inside the `geom_boxplot()` function:
 
@@ -495,7 +495,7 @@ There are various theme components that can be added as a separate component to 
 Some common one
 
 ::: {.panel-tabset .panel-blue}
-## Template code: adding a theme to a boxplot
+## Template code - add a theme to a boxplot
 ```{r}
 #| eval: false
 ggplot(_________, aes(x = _________, y = ________)) +
@@ -521,12 +521,9 @@ Some common ones are:
 In the previous section you produced a boxplot to compare tail lengths between treatment groups. Now customise your plot:
 
 - Add the argument `fill = treat_group` to the `aes()` function to tell R to colour the boxes according to the treatment group
-- Add to a theme to your plot to change the overall look
-- Add the component `+ scale_fill_manual(values = c("red", "green"))` to your plot. This allows you to specify the colours used for the boxes. If you use (`fill = treat_group` on its own, R will choose the colours automatically.) 
 
 ::: {.callout-caution icon="false" collapse="true"}
 ### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
-
 ```{r}
 # Add the argument `fill = treat_group` to the `aes()` function to tell R to colour the boxes according to the treatment group
 
@@ -534,21 +531,40 @@ ggplot(ws3data, aes(x = treat_group, y = tail_length_mm, fill = treat_group)) +
   geom_boxplot() +
   labs(x = "Treatment groups",
        y = "Tail length (mm)")
+```
+::: {style="margin-top: 0.1em;"}
+:::
+:::
 
+- Add to a theme to your plot to change the overall look
+
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+```{r}
 # Add to a theme to change the overall look
 # Below uses theme_minimal(), which gives the plot a cleaner appearance
 
 ggplot(ws3data, aes(x = treat_group, y = tail_length_mm, fill = treat_group)) +
   geom_boxplot() +
-  labs(x = "Treatment groups",
+  labs(x = "Treatment group",
        y = "Tail length (mm)") +
   theme_minimal()
+```
+::: {style="margin-top: 0.1em;"}
+:::
+:::
 
+- Add the component `+ scale_fill_manual(values = c("red", "green"))` to your plot. This allows you to specify the colours used for the boxes. (If you use `fill = treat_group` on its own, R will choose the colours automatically.) 
+
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
 # Add the component `+ scale_fill_manual(values = c("red", "green"))` to colour the boxes red and green 
 
 ggplot(ws3data, aes(x = treat_group, y = tail_length_mm, fill = treat_group)) +
   geom_boxplot() +
-  labs(x = "Treatment groups",
+  labs(x = "Treatment group",
        y = "Tail length (mm)") +
   theme_minimal() +
   scale_fill_manual(values = c("red", "green"))
@@ -557,7 +573,7 @@ ggplot(ws3data, aes(x = treat_group, y = tail_length_mm, fill = treat_group)) +
 
 ggplot(ws3data, aes(x = treat_group, y = tail_length_mm, fill = treat_group)) +
   geom_boxplot() +
-  labs(x = "Treatment groups",
+  labs(x = "Treatment group",
        y = "Tail length (mm)") +
   theme_minimal() +
   scale_fill_manual(values = c("blue", "yellow"))
@@ -565,7 +581,6 @@ ggplot(ws3data, aes(x = treat_group, y = tail_length_mm, fill = treat_group)) +
 ```
 ::: {style="margin-top: 0.1em;"}
 :::
-
 :::
 
 ::: {style="margin-top: 0.1em;"}
@@ -605,6 +620,8 @@ ggplot(iris, aes(x = Species, y = Petal.Length)) +
 :::
 
 - Colour the boxes manually to be yellow, purple and orange
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 ```{r}
 # Boxplot of petal length by species
 ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
@@ -614,8 +631,13 @@ ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
        x = "Species",
        y = "Petal Length")
 ```
+::: {style="margin-top: 0.1em;"}
+:::
+:::
 
 - Remove the legend (this link may be helpful: https://r-graph-gallery.com/239-custom-layout-legend-ggplot2.html)
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 ```{r}
 # Boxplot of petal length by species
 ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
@@ -626,9 +648,14 @@ ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
        y = "Petal Length") +
   theme(legend.position = "none") 
 ```
+::: {style="margin-top: 0.1em;"}
+:::
+:::
 
 - Add the component `+ geom_point()`
 - What does this do?
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 ```{r}
 # Add the component + geom_point()
 # This overlays the raw data
@@ -641,11 +668,15 @@ ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
        y = "Petal Length") +
   theme(legend.position = "none") 
 ```
+::: {style="margin-top: 0.1em;"}
+:::
+:::
 
 - Now replace the above component (`+ geom_point()` with: `+ geom_jitter()`
 - What does this do?
 - Trying adding the arguments `width=0.1` and `alpha=0.3` inside `geom_jitter()`. What effect does each argument have on the appearance of the plot? Try some other values.
-
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 ```{r}
 # Replace geom_point() with geom_jitter()
 # Jittering adds a small amount of random horizontal spread to the points,
@@ -676,6 +707,9 @@ ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
        y = "Petal Length") +
   theme(legend.position = "none") 
 ```
+::: {style="margin-top: 0.1em;"}
+:::
+:::
 
 ::: {style="margin-top: 0.1em;"}
 :::
@@ -690,7 +724,7 @@ The bar graph produced in the task above should look like this:
 ggplot(ws3data, aes(x = treat_group, y = tail_length_mm)) +
   geom_boxplot() +
   labs(x = "Treatment group",
-       y = "Tail length(mm)")
+       y = "Tail length (mm)")
 ```
 
 ::: {.callout-caution icon="false"}
