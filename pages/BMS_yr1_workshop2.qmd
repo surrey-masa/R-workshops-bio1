@@ -150,7 +150,7 @@ Confirm that the `readxl` package has successfully installed and loaded in your 
 **Step 2: Save the Excel file**
 
 - Download the penguins.xlsx file from the **Week 6 R Workshop folder on SurreyLearn**
-- Move the downloaded file from your Downloads folder to the dedicated folder for your R work on this module. This should be the same location where your R script is saved.
+- Move the downloaded file from your Downloads folder to the dedicated folder for your R work on this module. This should be the same location where your R script is saved
 
 ::: {.callout-important collapse="true"}
 ### Make sure your script and the penguins.xlsx file are saved in the same folder

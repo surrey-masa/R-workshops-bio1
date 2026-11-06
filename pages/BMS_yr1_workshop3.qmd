@@ -29,12 +29,14 @@ In this workshop, we will apply these skills to a new dataset and extend them by
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Analysis aim
 
-Investigate whether adding a supplement to hamster pup diet will affect tail growth
+Investigate whether adding a supplement to hamster pup diet will affect tail growth.
 
-[specifically, compare tail growth between the hamsters that were given the standard diet (the control group) and the hamsters that were given the supplement in addition to the standard diet (the treatment group).]
+To do this, we will compare the tail lengths of hamsters in the control group (standard diet) with those in the treatment group (standard diet plus supplement).
 :::
 
 ## Setup {#setup}
+
+### R setup
 
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
@@ -90,7 +92,27 @@ library(ggplot2)
 Loading a package makes its functions available for use in your current R session. Unlike installation, packages must be loaded each time you start R.
 :::
 
-## Importing workshop 3 data
+### About the workshop 3 data
+
+A group of scientists are investigating whether adding a supplement to hamster pup diet will affect tail growth.
+
+A control group was given the standard diet, whilst a treatment group was given the supplement in addition to the standard diet.
+
+The tail length was recorded in mm after five months of development.
+
+![](../images/ws3data_excel.png){width="200" style="display:block; margin: 2em auto;"}
+In the Excel spreadsheet shown above, each row corresponds to one hamster. One column contains the hamster's tail length, while another identifies the treatment group to which it belongs.
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Analysis aim
+
+Investigate whether adding a supplement to hamster pup diet will affect tail growth.
+
+To do this, we will compare the tail lengths of hamsters in the control group (standard diet) with those in the treatment group (standard diet plus supplement).
+:::
+
+
+### Importing the workshop 3 data
 
 In workshop 2, we learnt how to import data from an Excel file into R. We will repeat this process to import our workshop 3 data.
 
@@ -107,7 +129,8 @@ Confirm that the `readxl` package has successfully installed and loaded in your 
 
 **Step 2: Save the Excel file**
 
-Download the Workshop 3 data.xlsx file from SurreyLearn [link] and save it in your dedicated folder for the R work on this module. This should be the same location as where your R script is saved.
+- Download the Workshop 3 data.xlsx file from the **Week 6 R Workshop folder on SurreyLearn**
+- Move the downloaded file from your Downloads folder to the dedicated folder for your R work on this module. This should be the same location where your R script is saved
 
 **Step 3: Set your working directory**
 
@@ -196,7 +219,7 @@ We will now follow the same process to investigate differences in tail growth be
 
 It’s a good idea to explore and get to know the data you’re working with before starting any analysis. 
 
-We saw some useful functions for doing this in workshop 2. [link]
+We saw some useful functions for doing this in workshop 2.
 
 **View the whole data frame**
 
@@ -213,22 +236,58 @@ View(ws3data)
 
 ![](../images/view_ws3data.png){width="400" style="display:block; margin: 2em auto;"}
 
-This is quite a small dataframe, so we can get to know it visually rather than using functions.
+:::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+Using R functions we have seen so far, investigate the data frame:
 
-**About the data**
+- How many hamsters are in the sample?
+- How many hamsters are in each group?
+- What is the data type of each variable?
+- Are there any variables that should be converted to factors? If so, do so.
+- Produce a descriptive summary of the data frame.
+- What is the mean tail length?
 
-A group of scientists are investigating whether adding a supplement to hamster pup diet will affect tail growth.
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 
-A control group was given the standard diet, whilst a treatment group was given the supplement in addition to the standard diet.
+```{r}
+# Number of hamsters (altenatively, the number of obs is shown in the Environment tab)
+nrow(ws3data)
 
-The tail length was recorded in mm after five months of development.
+# Number of hamsters are in each group
+table(ws3data$treat_group)
 
+# View data types
+str(ws3data) # treat_group should be a factor because it represents a 
+             # fixed set of treatment groups (control and supplement)
+
+# Convert treat_group to a factor
+ws3data$treat_group <- as.factor(ws3data$treat_group)
+
+# Descriptive summary
+summary(ws3data)
+
+# Using the results of the summary function, mean tail length is 13.17mm
+
+# Alternatively, we could use the mean function:
+mean(ws3data$tail_length_mm)
+
+```
+::: {style="margin-top: 0.1em;"}
+:::
+
+:::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
 
 ### Grouped descriptive statistics
 
 Often, we want to obtain descriptive statistics broken down by certain subsets of data i.e. *grouped* descriptive statistics.
 
-We can see that this might be helpful for us here, because we want to compare tail growth between the treatment and the control group.
+We can see that this might be helpful for us here, because we want to compare tail growth between the supplement and the control group.
 
 Recall from workshop 2 that the `by()` function can be used to find grouped descriptive statistics:
 
@@ -246,13 +305,16 @@ by(______________________, ____________________, _______________)
 - In the `function` blank, enter the summary statistic you want to calculate. For example, mean, median, sd etc.
 :::
 
-To produce descriptive statistics for tail length in each treatment group in the workshop 3 dataset (`ws3data`):
+::: {.callout-note icon="false" collapse="true"}
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Recall: use $ to select a column from a data frame
+
+Remember that to select a column from a data frame, we need to use the `$` operator, e.g. to select the `tail_length_mm` column from the `ws3data` data frame, we would use `ws3data$tail_length_mm`.
+:::
+
+To use the `by()` function to produce descriptive statistics for tail length in each treatment group in the workshop 3 dataset (`ws3data`):
 
 - Our "column to summarise" is `ws3data$tail_length_mm`, because this contains the measurements that we want to summarise
 - Our "column to group by" is `ws3data$treat_group`, because this contains the treatment groups for which we want separate summaries
-
-Remember that to select a column from a data frame, we need to use the `$` operator, so to select the `tail_length_mm` column we use `ws3data$tail_length_mm`, and to select the `treat_group` column, we use `ws3data$treat_group`.
-
 - The "function to use" is the R function corresponding to the summary measure you want to calculate. For example, use `mean` for the mean, 'median' for the median etc.
 
 So altogether, to find the mean tail length for each treatment group, we would use the command:
@@ -263,6 +325,9 @@ So altogether, to find the mean tail length for each treatment group, we would u
 ```{r}
 by(ws3data$tail_length_mm, ws3data$treat_group, mean)
 ```
+:::
+
+::: {style="margin-top: 2em;"}
 :::
 
 :::: {.callout-caution icon="false"}
@@ -310,7 +375,7 @@ Based on these summaries, the supplement group appear generally to have longer t
 
 ### Creating a boxplot with ggplot2
 
-In workshop 2 we learnt how to create a boxplot using ggplot2 data.
+In workshop 2 we learnt how to create a boxplot using the ggplot2 package.
 
 This is the template code:
 
@@ -352,7 +417,6 @@ ggplot(ws3data, aes(x = treat_group, y = tail_length_mm)) +
 ::: {style="margin-top: 0.1em;"}
 :::
 
-Observations: Males have a higher median bill length than females, while the interquartile ranges are of similar width
 :::
 
 ::: {style="margin-top: 0.1em;"}
