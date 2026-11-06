@@ -82,7 +82,6 @@ Below is the code for *loading* the packages that are needed for this workshop. 
 #| message: false
 #| warning: false
 #| results: "hide"
-library(Hmisc)
 library(readxl)
 library(ggplot2)
 ```
@@ -251,15 +250,20 @@ Using R functions we have seen so far, investigate the data frame:
 ### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 
 ```{r}
-# Number of hamsters (altenatively, the number of obs is shown in the Environment tab)
+# Number of hamsters 
 nrow(ws3data)
 
-# Number of hamsters are in each group
+# (Alternatively, the number of obs is shown in the Environment tab,
+# or we could just open the data frame to see how many rows it has)
+
+# Number of hamsters in each group
 table(ws3data$treat_group)
 
 # View data types
-str(ws3data) # treat_group should be a factor because it represents a 
-             # fixed set of treatment groups (control and supplement)
+str(ws3data) 
+
+# treat_group should be a factor because it represents a 
+# fixed set of treatment groups (control and supplement)
 
 # Convert treat_group to a factor
 ws3data$treat_group <- as.factor(ws3data$treat_group)
@@ -424,7 +428,9 @@ ggplot(ws3data, aes(x = treat_group, y = tail_length_mm)) +
 
 ::::
 
-## Extension: Further boxplot customisations
+## ggplot2: Extension material
+
+### Additional customisation options
 
 ### Changing the fill colour of the boxes
 
@@ -437,7 +443,7 @@ We have already used `x=` and `y=` inside the `aes()` function to map variables 
 We can also map variables to other properties such as colour.
 
 ::: {.panel-tabset .panel-blue}
-## Template code: boxplot including fill colour by box
+## Template code - boxplot including fill colour by box
 
 In your existing boxplot code, add the argument `fill = ` as an additional argument inside the `aes()` function:
 
@@ -463,7 +469,7 @@ Whereas aesthetics specified inside the `aes()`function map a *variable* to a vi
 For example, if we put `fill = "blue"` will colour all of the boxes blue.
 
 ::: {.panel-tabset .panel-blue}
-## Template code: boxplot including fill colour by box
+## Template code - boxplot including fill colour by box
 
 In your existing boxplot code, add the argument `fill = ` as an argument inside the `geom_boxplot()` function:
 
@@ -482,7 +488,7 @@ ggplot(_________, aes(x = _________, y = ________)) +
 
 :::
 
-###Themes
+**Themes**
 
 There are various theme components that can be added as a separate component to change the overall appearance of the plot (background, gridlines, fonts etc.).
 
@@ -508,17 +514,172 @@ Some common ones are:
 - `theme_bw()`
 ::: 
 
-::: {.callout-caution icon="false"}
+### Additional tasks
+
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-In the previous section you produced a boxplot to compare tail lengths betwen treatment groups. Update your code to. Now:
+In the previous section you produced a boxplot to compare tail lengths between treatment groups. Now customise your plot:
 
 - Add the argument `fill = treat_group` to the `aes()` function to tell R to colour the boxes according to the treatment group
 - Add to a theme to your plot to change the overall look
+- Add the component `+ scale_fill_manual(values = c("red", "green"))` to your plot. This allows you to specify the colours used for the boxes. If you use (`fill = treat_group` on its own, R will choose the colours automatically.) 
 
-[Hint]
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 
-[Answers]
+```{r}
+# Add the argument `fill = treat_group` to the `aes()` function to tell R to colour the boxes according to the treatment group
+
+ggplot(ws3data, aes(x = treat_group, y = tail_length_mm, fill = treat_group)) +
+  geom_boxplot() +
+  labs(x = "Treatment groups",
+       y = "Tail length (mm)")
+
+# Add to a theme to change the overall look
+# Below uses theme_minimal(), which gives the plot a cleaner appearance
+
+ggplot(ws3data, aes(x = treat_group, y = tail_length_mm, fill = treat_group)) +
+  geom_boxplot() +
+  labs(x = "Treatment groups",
+       y = "Tail length (mm)") +
+  theme_minimal()
+
+# Add the component `+ scale_fill_manual(values = c("red", "green"))` to colour the boxes red and green 
+
+ggplot(ws3data, aes(x = treat_group, y = tail_length_mm, fill = treat_group)) +
+  geom_boxplot() +
+  labs(x = "Treatment groups",
+       y = "Tail length (mm)") +
+  theme_minimal() +
+  scale_fill_manual(values = c("red", "green"))
+
+# Change to blue and yellow!
+
+ggplot(ws3data, aes(x = treat_group, y = tail_length_mm, fill = treat_group)) +
+  geom_boxplot() +
+  labs(x = "Treatment groups",
+       y = "Tail length (mm)") +
+  theme_minimal() +
+  scale_fill_manual(values = c("blue", "yellow"))
+
+```
+::: {style="margin-top: 0.1em;"}
 :::
+
+:::
+
+::: {style="margin-top: 0.1em;"}
+:::
+::::
+
+:::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+- The iris data set, built into R, contains data on 150 iris flowers. Store it as a data frame using the following line of code: `iris <- data.frame(iris)`
+
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+#| results: hide
+iris <- data.frame(iris)
+```
+::: {style="margin-top: 0.1em;"}
+:::
+:::
+
+- Create a boxplot of petal length by species
+
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Boxplot of petal length by species
+ggplot(iris, aes(x = Species, y = Petal.Length)) +
+  geom_boxplot() +
+  labs(title = "Petal Length by Species",
+       x = "Species",
+       y = "Petal Length")
+```
+::: {style="margin-top: 0.1em;"}
+:::
+:::
+
+- Colour the boxes manually to be yellow, purple and orange
+```{r}
+# Boxplot of petal length by species
+ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("yellow","purple","orange")) +
+  labs(title = "Petal Length by Species",
+       x = "Species",
+       y = "Petal Length")
+```
+
+- Remove the legend (this link may be helpful: https://r-graph-gallery.com/239-custom-layout-legend-ggplot2.html)
+```{r}
+# Boxplot of petal length by species
+ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("yellow","purple","orange")) +
+  labs(title = "Petal Length by Species",
+       x = "Species",
+       y = "Petal Length") +
+  theme(legend.position = "none") 
+```
+
+- Add the component `+ geom_point()`
+- What does this do?
+```{r}
+# Add the component + geom_point()
+# This overlays the raw data
+ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
+  geom_boxplot() +
+  geom_point() +                       
+  scale_fill_manual(values = c("yellow","purple","orange")) +
+  labs(title = "Petal Length by Species",
+       x = "Species",
+       y = "Petal Length") +
+  theme(legend.position = "none") 
+```
+
+- Now replace the above component (`+ geom_point()` with: `+ geom_jitter()`
+- What does this do?
+- Trying adding the arguments `width=0.1` and `alpha=0.3` inside `geom_jitter()`. What effect does each argument have on the appearance of the plot? Try some other values.
+
+```{r}
+# Replace geom_point() with geom_jitter()
+# Jittering adds a small amount of random horizontal spread to the points,
+# making it easier to see individual observations when values overlap
+
+ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
+  geom_boxplot() +
+  geom_jitter() +                       
+  scale_fill_manual(values = c("yellow","purple","orange")) +
+  labs(title = "Petal Length by Species",
+       x = "Species",
+       y = "Petal Length") +
+  theme(legend.position = "none") 
+```
+
+```{r}
+# Add the arguments `width = 0.1` and `alpha = 0.3` inside `geom_jitter()`
+# The width argument controls the amount of horizontal spread applied to the points
+# The alpha argument controls transparency (0 = completely transparent,
+# 1 = completely opaque)
+
+ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.1, alpha = 0.3) +                       
+  scale_fill_manual(values = c("yellow","purple","orange")) +
+  labs(title = "Petal Length by Species",
+       x = "Species",
+       y = "Petal Length") +
+  theme(legend.position = "none") 
+```
+
+::: {style="margin-top: 0.1em;"}
+:::
+::::
 
 ## Boxplot interpretation
 
