@@ -884,6 +884,39 @@ ggplot(penguins, aes(x = body_mass_g)) +
 
 ::::
 
+### Copying and saving plots
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
+
+- Copy and save plots created with ggplot2
+:::
+
+Once you are happy with a plot, you may want to save it to use elsewhere - for example in a report or presentation.
+
+**Copying a plot**
+
+You can copy a plot by clicking the **Export** button in the Plots pane in RStudio, then selecting **Copy to Clipboard**. You can then paste it directly into a Word document or PowerPoint presentation. Alternatively, you can right click on a plot and copy it.
+
+![](../images/clipboard-1982207542.png)
+
+**Saving a plot**
+
+To save a plot as an image file, you can either:
+
+- Click **Export** in the Plots pane, then select **Save as Image** and choose the file format, size, and destination
+
+![](../images/clipboard-3693964577.png)
+
+- Use `ggsave()` in your code, which saves the most recently generated plot to a file:
+
+```{r}
+#| eval: false 
+ggsave("my_plot.png", width = 8, height = 5)
+```
+
+`ggsave()` automatically detects the file format from the file extension - common options include `.png`, `.pdf`, and `.jpeg`.
+
 ## Feedback
 
 <iframe width="100%" height="800px" src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=kyaQa3QQqkCeIdiURqLrtVgcZHyUszJDvoXhoILzj8dURE9SQlpZWVdOSFkyOTNVR0o4OUNCRlJRRS4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>

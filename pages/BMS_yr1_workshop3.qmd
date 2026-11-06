@@ -428,6 +428,52 @@ ggplot(ws3data, aes(x = treat_group, y = tail_length_mm)) +
 
 ::::
 
+### Boxplot interpretation
+
+The boxplot produced in the previous task above (compare tail lengths between the two treatment groups) should look like this:
+
+```{r}
+#| echo: false
+ggplot(ws3data, aes(x = treat_group, y = tail_length_mm)) +
+  geom_boxplot() +
+  labs(x = "Treatment group",
+       y = "Tail length (mm)")
+```
+
+::: callout-important
+### Adding a figure title
+
+This graph currently has no title. In practice, you can add a figure legend by copying the graph into Word and adding a figure legend below the graph.
+
+(It is not possible to add a proper figure caption in a standard R script.)
+:::
+
+:::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+What observations can we make from the bar graph regarding the comparison between the groups?
+
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+Observations:
+
+- Hamsters that received the supplement diet generally had longer tails than hamsters in the control group - the median tail length is higher in the supplement group, and there is no overlap between the interquartile ranges (IQRs)
+- The control group contains one unusually short tail length (an outlier)
+- The supplement group has a larger IQR and range, suggesting greater variation in tail lengths then in the control group
+
+Conclusion:
+
+The boxplot suggests that tail lengths may be greater in hamsters receiving the supplement. However, a statistical test is needed to determine whether there is sufficient evidence of a genuine difference between the treatment groups, rather than the observed difference being due to random variation.
+
+::: {style="margin-top: 0.1em;"}
+:::
+:::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
+
 ## ggplot2 extension material
 
 ### Additional boxplot customisation options
@@ -516,6 +562,8 @@ Some common ones are:
 
 ### Additional tasks
 
+**Customising the tail lengths boxplot**
+
 :::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 In the previous section you produced a boxplot to compare tail lengths between treatment groups. Now customise your plot:
@@ -587,6 +635,8 @@ ggplot(ws3data, aes(x = treat_group, y = tail_length_mm, fill = treat_group)) +
 :::
 ::::
 
+**Creating and customising a boxplot using the iris data** {#iris}
+
 :::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 - The iris data set, built into R, contains data on 150 iris flowers. Store it as a data frame using the following line of code: `iris <- data.frame(iris)`
@@ -620,6 +670,7 @@ ggplot(iris, aes(x = Species, y = Petal.Length)) +
 :::
 
 - Colour the boxes manually to be yellow, purple and orange
+
 ::: {.callout-caution icon="false" collapse="true"}
 ### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 ```{r}
@@ -636,7 +687,9 @@ ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
 :::
 
 - Remove the legend (this link may be helpful: https://r-graph-gallery.com/239-custom-layout-legend-ggplot2.html)
+
 ::: {.callout-caution icon="false" collapse="true"}
+
 ### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 ```{r}
 # Boxplot of petal length by species
@@ -654,7 +707,9 @@ ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
 
 - Add the component `+ geom_point()`
 - What does this do?
+
 ::: {.callout-caution icon="false" collapse="true"}
+
 ### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 ```{r}
 # Add the component + geom_point()
@@ -675,7 +730,9 @@ ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
 - Now replace the above component (`+ geom_point()` with: `+ geom_jitter()`
 - What does this do?
 - Trying adding the arguments `width=0.1` and `alpha=0.3` inside `geom_jitter()`. What effect does each argument have on the appearance of the plot? Try some other values.
+
 ::: {.callout-caution icon="false" collapse="true"}
+
 ### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 ```{r}
 # Replace geom_point() with geom_jitter()
@@ -715,67 +772,6 @@ ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
 :::
 ::::
 
-## Boxplot interpretation
-
-The bar graph produced in the task above should look like this:
-
-```{r}
-#| echo: false
-ggplot(ws3data, aes(x = treat_group, y = tail_length_mm)) +
-  geom_boxplot() +
-  labs(x = "Treatment group",
-       y = "Tail length (mm)")
-```
-
-::: {.callout-caution icon="false"}
-### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-What observations can we make from the bar graph regarding the comparison between the groups?
-
-[Answers]
-:::
-
-::: callout-important
-### Adding a figure title
-
-This graph currently has no title. In practice, you can add a figure legend by copying the graph into Word and adding a figure legend below the graph.
-
-(It is not possible to add a proper figure caption in a standard R script.)
-:::
-
-
-## Copying and saving plots
-
-::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
-
-- Copy and save plots created with ggplot2
-:::
-
-Once you are happy with a plot, you may want to save it to use elsewhere - for example in a report or presentation.
-
-### Copying a plot
-
-The simplest way to copy a plot is to click the **Export** button in the Plots pane in RStudio, then select **Copy to Clipboard**. You can then paste it directly into a Word document or PowerPoint presentation.
-
-![](../images/clipboard-1982207542.png)
-
-### Saving a plot
-
-To save a plot as an image file, you can either:
-
-- Click **Export** in the Plots pane, then select **Save as Image** and choose the file format, size, and destination
-
-![](../images/clipboard-3693964577.png)
-
-- Use `ggsave()` in your code, which saves the most recently generated plot to a file:
-
-```{r}
-#| eval: false 
-ggsave("my_plot.png", width = 8, height = 5)
-```
-
-`ggsave()` automatically detects the file format from the file extension - common options include `.png`, `.pdf`, and `.jpeg`.
-
 ## Statistical tests in R
 
 ::: {.callout-tip icon="false"}
@@ -784,7 +780,7 @@ ggsave("my_plot.png", width = 8, height = 5)
 - Run a t-test to statistically compare two groups of measurements
 :::
 
-### Analysis of Workshop 3 data
+### Analysis of workshop 3 data
 
 To investigate whether adding a supplement to hamster pup diet will affect tail growth, we are comparing the tail lengths of a group of hamster pups who were given the standard diet (control group), to a different group who received the supplement in additional to the standard diet (treated group).
 
@@ -833,12 +829,22 @@ For the purposes of the R work in this module, you do not need to check these as
 An R command to run a t-test follows the below structure:
 
 ::: {.panel-tabset .panel-blue}
-## Template code: independent t-test
+## Template code - independent t-test
 
 ```{r}
 #| eval: false
+
+# Run the test and store the results
+
 _______________ <- t.test(_____~______, data = ____________, var.equal=TRUE)
  results name              DV     IV            dataframe
+ 
+ 
+# Type and run the name of your results object to view the results
+ 
+_______________ 
+ results name 
+ 
 ```
 
 - `results name` is a name you choose to store the results of the t-test
@@ -848,31 +854,46 @@ _______________ <- t.test(_____~______, data = ____________, var.equal=TRUE)
 
 :::
 
-You can view the results by.......
-
-
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 - Using the template code, fill in the appropriate code to carry out an independent t-test to compare whether the mean tail length differs between hamster pups fed the standard diet (control) and those given the supplement.
-- View a summary of the results by printing the results object. Recall from Workshop 1 that you can do this by either typing and running the object name, or by using the print() function.
+- View a summary of the results by printing the results object. Recall from workshop 1 that you can do this by either typing and running the object name, or by using the print() function.
 - Add a comment to your code stating the p-value – is the difference statistically significant?
 
-[Answers]
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Carry out an independent t-test to compare whether the mean tail length differs between hamster pups fed the standard diet (control) and those given the supplement
+
+results <- t.test(tail_length_mm ~ treat_group, data = ws3data, var.equal=TRUE)
+
+# View the results
+
+results
+```
+
+::: {style="margin-top: 0.1em;"}
 :::
 
-**maybe something more explicit about where to find the p-value in the results. and that this can sometimes be added to a graph.
+From the results, we can see that the p-value = 3.532e-07. Here, e-07 means × 10^-7^, so the p-value is 0.0000003532. In other words, it is very small! In most research, a result with p < 0.05 is considered statistically significant. Our p-value is less than 0.05, so there is statistically significant evidence of a difference in mean tail length between the supplement and control groups. Specifically, hamsters in the supplement group (mean = 16.00 mm) had a statistically significantly greater mean tail length than hamsters in the control group (mean = 10.33 mm).
 
-![](../images/ws3_ttest_results.png){width="700" style="display:block; margin: 2em auto;"}
+:::
 
+::: {style="margin-top: 0.1em;"}
+:::
+::::
 
-### Optional reading: Syntax for other statistical tests in R
+### Optional reading and additional task
+
+**Syntax for other statistical tests in R**
 
 This information is for interest only.
 
 Many statistical tests use a similar syntax to that shown above, with `t.test` replaced by the function for the appropriate test. Some examples are shown below.
 
 ::: {.panel-tabset .panel-blue}
-## Template code: other statistical tests
+## Template code - other statistical tests
 
 ```{r}
 #| eval: false
@@ -896,99 +917,104 @@ _______________ <- lm(_____~______ + ______ + ..., data = ____________)
 
 Additional arguments may be included to adjust or customise the tests as needed.
 
+:::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 
-## Summary
+This task is the continuation of the earlier [iris boxplot task](#iris)
 
-::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Key points
+- Use the by() function to find the mean petal length of each species
+- Run a one-way ANOVA to to determine whether mean petal length differs between species
+- Is there a statistically significant difference between the species?
 
-- ...
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Find the mean petal length of each species
+
+by(iris$Petal.Length, iris$Species, mean)
+
+# One-way ANOVA to compare petal lengths between species
+
+aov_results <- aov(Petal.Length ~ Species, data = iris)
+  
+summary(aov_results)
+
+# There is a statistically significant difference between the species
+
+```
 
 
 :::
 
-.========================================
-
-[Use slides]
-
-
-.===== work this in (slide 15) - "comparing groups" - Will / Sam's lectures
-
-Comparing groups:Workshop 3 data
-
-A group of scientists are investigating whether adding a supplement to hamster pup diet will **affect tail growth**.
-
-A **control group* was given the standard diet, whilst a **treatment group** was given the supplement in addition to the standard diet.
-
-The tail length was recorded in mm after five months of development.
+::: {style="margin-top: 0.1em;"}
+:::
+::::
 
 
-We can compare the tail lengths in the control group versus the treatment group, to see if the supplement has lead to longer tails…
+## Summary
+
+In this workshop, we analysed a dataset comparing tail lengths between hamster pups receiving a standard diet and those receiving a dietary supplement.
+
+Below is a summary of the main concepts covered.
+
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Data import and exploration
+
+- Use `read_excel()` to import Excel data into R.
+- Use `View()`, `nrow()`, `table()`, `str()`, and `summary()` to explore a data frame.
+- It is good practice to explore and understand a dataset before carrying out any analysis.
+- Variables representing fixed categories should be stored as factors using `as.factor()`.
+:::
+
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Grouped descriptive statistics
+
+- Use `by()` to calculate descriptive statistics separately for different groups.
+- Common descriptive statistics include the mean, median, standard deviation, minimum, and maximum.
+- Grouped descriptive statistics provide a numerical summary of differences between groups.
+- Descriptive statistics alone cannot determine whether an observed difference is statistically significant.
+:::
+
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Boxplots
+
+- Use the **ggplot2** package to create boxplots.
+- Use `ggplot()` to specify the data and variables.
+- Use `geom_boxplot()` to create a boxplot.
+- Boxplots allow groups to be compared visually using medians, interquartile ranges (IQRs), ranges, and outliers.
+- A boxplot can suggest whether groups differ, but a statistical test is needed to assess whether there is sufficient evidence of a genuine difference.
+:::
+
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Boxplot customisation with ggplot2
+
+- Use `fill = group_variable` inside `aes()` to colour boxes according to a grouping variable.
+- Use `theme_*()` functions such as `theme_minimal()` to change the overall appearance of a plot.
+- Use `scale_fill_manual()` to specify your own colours.
+- Use `geom_point()` to overlay the raw data points on a plot.
+- Use `geom_jitter()` to add a small amount of horizontal variation, making overlapping observations easier to see.
+- Use the `width` argument in `geom_jitter()` to control the amount of horizontal spread and the `alpha` argument to control transparency.
+:::
+
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Independent t-tests
+
+- An independent t-test compares the means of two independent groups.
+- The dependent variable should be continuous, and the independent variable should define two groups.
+- Use `t.test(DV ~ IV, data = ..., var.equal = TRUE)` to perform an independent t-test.
+- The t-test produces a p-value, which can be used to assess statistical significance.
+- In many fields, a result with `p < 0.05` is considered statistically significant.
+:::
+
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Statistical terminology
+
+- The **dependent variable (DV)** is the outcome being measured or compared.
+- The **independent variable (IV)** is the variable that defines the groups being compared.
+- Statistical tests are used to determine whether observed differences are likely to reflect a genuine effect or random variation.
+- Statistical tests rely on assumptions, which should normally be checked before carrying out an analysis.
+:::
 
 
 
-
-[[[plotting - now can introduce more general ggplot template??]]]
-
-
-
-===============================================================
-
-
-=======
-
-[[coursework data]]
-
-```{r}
-#| eval: FALSE
-
-weight_change <- c(10,15,12,18,13,6,29,21,24,20,28,30,25,21,15,21,23,22)
-group <- c(rep("control",9),rep("treated",9)) # note the boxplot stills works if it's not a factor
-
-cw <- data.frame(group,weight_change) 
-# note if you apply the factor function here it actually names the variable factor.group!
-
-# This is not by group currently
-
-library(ggplot2)
-hist(weight_change)
-ggplot(cw, aes(x=weight_change)) + geom_histogram(bins=3)
-qqnorm(cw$weight_change)
-qqline(cw$weight_change)
-
-ggplot(cw, aes(x = weight_change)) +
-  geom_histogram(bins=3) +
-  facet_wrap(~ group)
-
-ggplot(cw, aes(x = group, y = weight_change)) +
-  geom_boxplot() +
-  geom_point()
-```
-
-*=======================
-
-[Scroll up in "complete this github table" copilot chat - gave scaffolding for working up from values to data frames ]
-
-An object in R is a piece of information stored in memory.
-
-A variable name is a name that refers to an object.
-
-For example, when we run:
-
-```{r}
-x <- 2 + 3
-```
-
-R first evaluates the expression `2 + 3`, producing the value `5`. It then stores this value as an object and associates it with the variable name `x`.
-
-After this assignment has been run, we can use `x` elsewhere in our code:
-
-```{r}
-x
-```
-
-```{r}
-x * 10
-```
-
-*=======================
